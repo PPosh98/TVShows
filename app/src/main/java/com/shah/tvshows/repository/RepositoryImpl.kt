@@ -22,7 +22,7 @@ class RepositoryImpl @Inject constructor(
             emit(Resource.Loading(true))
             val tvShowFromLocal = tvShowsDAO.readTvShow(showName)
             val shouldJustLoadFromCache =
-                tvShowFromLocal?.query == showName && showName.isNotBlank()
+                tvShowFromLocal != null && showName.isNotBlank()
             if (shouldJustLoadFromCache) {
                 emit(Resource.Success(tvShowFromLocal?.tvShowModel))
                 return@flow

@@ -11,6 +11,6 @@ interface TvShowsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShow(tvShowsEntity: TvShowsEntity)
 
-    @Query("SELECT * FROM tvShows WHERE query = :query")
+    @Query("SELECT * FROM tvShows WHERE :query LIKE '%' || query || '%' OR query LIKE '%' || :query || '%'")
     suspend fun readTvShow(query: String) : TvShowsEntity?
 }
